@@ -17,7 +17,7 @@ while cap.isOpened():
 
     succes, img = cap.read()
 
-    k = cv2.waitKey(5)
+    k = cv2.waitKey(2)
 
     if k == ord('s'):
         break

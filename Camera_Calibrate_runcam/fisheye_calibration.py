@@ -8,7 +8,8 @@ import os
 
 chessboardSize = (10,7)
 # frameSize = (1280, 720)
-frameSize = (1920, 1080)
+# frameSize = (1920, 1080)
+frameSize = (2560,1440)
 # Termination criteria
 criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.1)
 
@@ -24,7 +25,7 @@ objpoints = []  # 3D points
 imgpoints = []  # 2D points
 
 # Load images
-images = glob.glob(os.path.expanduser('~/catkin_fishcam_ws/src/fish_pc/scripts/Camera_Calibrate_runcam/runcam_images_1080p/*.png'))
+images = glob.glob(os.path.expanduser('runcam_images_2k/*.png'))
 if not images:
     print("No images found. Please check the directory path.")
 else:
@@ -71,12 +72,12 @@ ret, K, D, rvecs, tvecs = cv.fisheye.calibrate(
 )
 
 # Save calibration data
-with open("fisheye_calibration_1080p_25.pkl", "wb") as f:
+with open("fisheye_calibration_runcam_2k_25.pkl", "wb") as f:
     pickle.dump((K, D), f)
 
 ################ UNDISTORTION #############################################
 
-img = cv.imread('/home/kloya/catkin_fishcam_ws/src/fish_pc/scripts/Camera_Calibrate_runcam/runcam_images_1080p/img55.png')
+img = cv.imread('runcam_images_2k/img5.png')
 h, w = img.shape[:2]
 new_K = cv.fisheye.estimateNewCameraMatrixForUndistortRectify(K, D, (w, h), np.eye(3), balance=1)
 
@@ -84,7 +85,7 @@ map1, map2 = cv.fisheye.initUndistortRectifyMap(K, D, np.eye(3), new_K, (w, h), 
 undistorted_img = cv.remap(img, map1, map2, interpolation=cv.INTER_LINEAR)
 
 # Save undistorted image
-cv.imwrite("fisheye_undistorted_1080p.png", undistorted_img)
+cv.imwrite("fisheye_undistorted_2k_img5.png", undistorted_img)
 
 # Display images
 # cv.imshow("Original", img)
