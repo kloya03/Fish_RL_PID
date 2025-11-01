@@ -6,9 +6,9 @@ import os
 
 
 ################ FIND CHESSBOARD CORNERS - OBJECT POINTS AND IMAGE POINTS #############################
-
+w, h = 2560,1440
 chessboardSize = (10,7)
-frameSize = (1280,720)
+frameSize = (w,h)
 
 
 
@@ -30,7 +30,7 @@ imgpoints = [] # 2d points in image plane.
 
 
 # Load images
-images = glob.glob(os.path.expanduser('home/kloya/Fish_RL_PID/Camera_Calibrate_runcam/images_2k_30fps/*.png'))
+images = glob.glob(os.path.expanduser('home/kloya/Fish_RL_PID/Camera_Calibrate_runcam/runcam_images_2k/*.png'))
 if not images:
     print("No images found. Please check the directory path and file extensions.")
 else:
