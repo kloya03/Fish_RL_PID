@@ -13,11 +13,11 @@ def nothing(x):
     pass
 
 cap = cv2.VideoCapture(0)
-width = 1920
-height = 1080
+width = 2560
+height = 1440
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
-cap.set(cv2.CAP_PROP_FPS, 60)  # Set fps to 1
+cap.set(cv2.CAP_PROP_FPS, 30)  # Set fps to 1
 fps = cap.get(cv2.CAP_PROP_FPS)
 frame_count = 0
 
@@ -35,7 +35,7 @@ cv2.createTrackbar('valLow', 'Trackbars', 150, 255, nothing)
 cv2.createTrackbar('valHigh', 'Trackbars', 245, 255, nothing)
 
 # Load the camera fisheye calibration data
-file_path = "/home/kloya/catkin_fishcam_ws/src/fish_pc/scripts/Camera_Calibrate_runcam/fisheye_calibration_1080p_25.pkl"
+file_path = "fisheye_calibration_runcam_2k_25.pkl"
 with open(file_path, "rb") as file:  # "rb" means read in binary mode
     data = pickle.load(file)
 camera_matrix, distortion_coeffs = data
@@ -70,8 +70,8 @@ while cap.isOpened():
     if not ret:
         break
     frame_count += 1
-    # frame = cv2.flip(frame, 0)
-    # frame  = cv2.flip(frame, 1)
+    frame = cv2.flip(frame, 0)
+    frame  = cv2.flip(frame, 1)
     # cv2.imshow("frame", frame)
     # Undistort the frame
     # undistorted_frame = cv2.undistort(frame, camera_matrix, dist_coeffs, None, new_camera_matrix)
@@ -159,7 +159,7 @@ calibration_data = {'pixels_per_m': pixels_per_m_f,
 # input(f"Calibration for {position} position complete. Press Enter to continue to the next position...")
 
 
-np.savez('runcam_calibration_data_1080p.npz', **calibration_data)
+np.savez('runcam_calibration_data_2k.npz', **calibration_data)
     
 print("Camera calibration successful.")
 

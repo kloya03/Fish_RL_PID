@@ -10,7 +10,7 @@ import pickle
 # dist_coeffs = np.array([0.399, -1.466, 1.906, -0.84690], dtype=np.float32)
 
 
-file_path = "/home/kloya/catkin_fishcam_ws/src/fish_pc/scripts/Camera_Calibrate_runcam/fisheye_calibration_1080p_25.pkl"
+file_path = "../Camera_Calibrate_runcam/fisheye_calibration_runcam_2k_25.pkl"
 with open(file_path, "rb") as file:  # "rb" means read in binary mode
     data = pickle.load(file)
 camera_matrix, distortion_coeffs = data
@@ -20,8 +20,8 @@ print("Camera Matrix:\n", camera_matrix)
 print("Distortion Coefficients:\n", distortion_coeffs)
 
 # Load the video
-# h, w = 1440, 2560
-h, w = 1080, 1920
+h, w = 1440, 2560
+# h, w = 1080, 1920
 # h, w = 720, 1280
 # new_camera_matrix, roi = cv2.getOptimalNewCameraMatrix(camera_matrix, distortion_coeffs, (w, h), 1, (w, h))
 # new_camera_matrix = cv2.fisheye.estimateNewCameraMatrixForUndistortRectify(camera_matrix, distortion_coeffs, (w, h), np.eye(3), balance=1)
@@ -31,16 +31,16 @@ h, w = 1080, 1920
 # map1, map2 = cv2.fisheye.initUndistortRectifyMap(camera_matrix, distortion_coeffs, np.eye(3), new_camera_matrix, (w, h), cv2.CV_16SC2)
 
 # Open the video capture
-cap = cv2.VideoCapture(4)
+cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, w)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, h)
 cap.set(cv2.CAP_PROP_FPS,30)
 fps = cap.get(cv2.CAP_PROP_FPS)
 current_datetime = datetime.datetime.now()
-timestamped_filename_video = f"Test1_11080p_dist{current_datetime.strftime('%Y%m%d_%H%M')}.mp4"
+# timestamped_filename_video = f"Test1_11080p_dist{current_datetime.strftime('%Y%m%d_%H%M')}.mp4"
 # Define the codec and create VideoWriter object
-fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-out = cv2.VideoWriter('/home/kloya/' + timestamped_filename_video, fourcc, fps, (w, h))
+# fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+# out = cv2.VideoWriter('/home/kloya/' + timestamped_filename_video, fourcc, fps, (w, h))
 while(cap.isOpened()):
     ts = time.time()
     ret, frame = cap.read()
@@ -48,8 +48,8 @@ while(cap.isOpened()):
         # Get the current timestamp
         
         timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        # frame = cv2.flip(frame, 0)
-        # frame = cv2.flip(frame, 1)
+        frame = cv2.flip(frame, 0)
+        frame = cv2.flip(frame, 1)
         # map1, map2 = cv2.fisheye.initUndistortRectifyMap(camera_matrix, distortion_coeffs, np.eye(3), new_camera_matrix, (w, h), cv2.CV_16SC2)
         # frame = cv2.remap(frame, map1, map2, interpolation=cv2.INTER_LINEAR)
         
@@ -88,7 +88,7 @@ while(cap.isOpened()):
         cv2.putText(frame, timestamp, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
         # Write the frame
-        out.write(frame)
+        # out.write(frame)
 
         # Display the frame
         cv2.imshow('frame', frame)
@@ -102,5 +102,5 @@ while(cap.isOpened()):
 
 # Release everything if job is finished
 cap.release()
-out.release()
+# out.release()
 cv2.destroyAllWindows()
