@@ -30,7 +30,7 @@ imgpoints = [] # 2d points in image plane.
 
 
 # Load images
-images = glob.glob(os.path.expanduser('home/kloya/catkin_fishcam_ws/src/fish_pc/scripts/Camera_Calibrate_runcam/images/*.png'))
+images = glob.glob(os.path.expanduser('home/kloya/Fish_RL_PID/Camera_Calibrate_runcam/images_2k_30fps/*.png'))
 if not images:
     print("No images found. Please check the directory path and file extensions.")
 else:
