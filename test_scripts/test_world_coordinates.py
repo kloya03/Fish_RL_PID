@@ -71,10 +71,10 @@ if __name__ == '__main__':
 
         # These values should be obtained from a camera calibration process
         calibration_data = np.load('../Camera_Calibrate_runcam/runcam_calibration_data_2k.npz')
-        pixels_per_m = calibration_data['pixels_per_m']
+        pixels_per_m = 423#1calibration_data['pixels_per_m']
         # pixels_per_m = 245
         target_pix = []
-        CS = (664,969)
+        CS = (1482,686)
         # camera_matrix = np.array([[600, 0, 640],
         #                           [0, 600, 360],
         #                           [0, 0, 1]], dtype=np.float32)
@@ -111,14 +111,15 @@ if __name__ == '__main__':
             
             ret, frame = cap.read()
             if ret:
-                frame = cv2.flip(frame, 0)
-                frame = cv2.flip(frame, 1)
+                # frame = cv2.flip(frame, 0)
+                # frame = cv2.flip(frame, 1)
 
                 # Undistort the frame
                 # cv2.imshow('undistorted_frameff', frame)
                 # undistorted_frame = cv2.undistort(frame, camera_matrix, dist_coeffs, None, new_camera_matrix)
-                undistorted_frame = cv2.remap(frame, map1, map2, interpolation=cv2.INTER_LINEAR)
+                # undistorted_frame = cv2.remap(frame, map1, map2, interpolation=cv2.INTER_LINEAR)
                 # Convert to HSV
+                undistorted_frame = frame
                 hsv = cv2.cvtColor(undistorted_frame, cv2.COLOR_BGR2HSV)
                 # Make the specified region black based on the ROI
                 hsv[:110, :] = 0  # Top boundary
@@ -128,7 +129,7 @@ if __name__ == '__main__':
                 hsv[:110, :] = 0
                 hsv[1200: , 1694:] = 0
                 hsv[:218 , 1694:] = 0
-                cv2.imshow("hsv", hsv)
+                # cv2.imshow("hsv", hsv)
                     #   Create mask for orange color
                 hl = 3#cv2.getTrackbarPos('h_Low', 'Trackbars')
                 hu = 45#cv2.getTrackbarPos('h_Hi', 'Trackbars')
@@ -194,6 +195,7 @@ if __name__ == '__main__':
                     (x2,y2)= current_positions[1]
                     com_f = ((x2 + x1) / (2), (y2 + y1) / (2))
                     com_p = [1,-1]*(np.array(com_f) - CS)  # tranlsate to frame reference (180 deg rot in x-axis)
+                    print(com_p)
                     com = com_p/pixels_per_m  # convert to meters
                     filtered_com = lpf_com.apply(np.array(com))
                     filtered_com = filtered_com.tolist()  # Ensure com is a list
