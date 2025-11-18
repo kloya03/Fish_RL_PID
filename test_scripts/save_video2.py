@@ -61,7 +61,8 @@ while(cap.isOpened()):
         # hsv[:, :110] = 0  # Left boundary
         # hsv[:, -100:] = 0  # Right boundary
 
-            #   Create mask for orange color
+            #   Create masnp.array([[roll], [pitch], [yaw]])
+        self.kf.uk for orange color
         hl = 3#cv2.getTrackbarPos('h_Low', 'Trackbars')
         hu = 45#cv2.getTrackbarPos('h_Hi', 'Trackbars')
         sl = 140#cv2.getTrackbarPos('satLow', 'Trackbars')
