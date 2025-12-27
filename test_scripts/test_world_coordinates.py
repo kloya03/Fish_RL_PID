@@ -74,7 +74,7 @@ if __name__ == '__main__':
         pixels_per_m = 423#1calibration_data['pixels_per_m']
         # pixels_per_m = 245
         target_pix = []
-        CS = (1482,686)
+        CS = (1523,489)
         # camera_matrix = np.array([[600, 0, 640],
         #                           [0, 600, 360],
         #                           [0, 0, 1]], dtype=np.float32)
@@ -95,7 +95,7 @@ if __name__ == '__main__':
         new_camera_matrix = cv2.fisheye.estimateNewCameraMatrixForUndistortRectify(camera_matrix, distortion_coeffs, (w, h), np.eye(3), balance=1)
         map1, map2 = cv2.fisheye.initUndistortRectifyMap(camera_matrix, distortion_coeffs, np.eye(3), new_camera_matrix, (w, h), cv2.CV_16SC2)
 
-        filepath = 0#'/home/kloya/Videos_02_23/test8_10_3.mp4'
+        filepath = 4#'/home/kloya/Videos_02_23/test8_10_3.mp4'
         cap = cv2.VideoCapture(filepath)
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, w)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, h)
@@ -195,8 +195,9 @@ if __name__ == '__main__':
                     (x2,y2)= current_positions[1]
                     com_f = ((x2 + x1) / (2), (y2 + y1) / (2))
                     com_p = [1,-1]*(np.array(com_f) - CS)  # tranlsate to frame reference (180 deg rot in x-axis)
-                    print(com_p)
                     com = com_p/pixels_per_m  # convert to meters
+                    print(com)
+
                     filtered_com = lpf_com.apply(np.array(com))
                     filtered_com = filtered_com.tolist()  # Ensure com is a list
                     x_position = filtered_com[0]

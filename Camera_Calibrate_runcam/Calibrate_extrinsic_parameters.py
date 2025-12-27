@@ -12,9 +12,9 @@ import pickle
 def nothing(x):
     pass
 
-cap = cv2.VideoCapture(0)
-width = 2560
-height = 1440
+cap = cv2.VideoCapture(4)
+width = 1920
+height = 1080
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 cap.set(cv2.CAP_PROP_FPS, 30)  # Set fps to 1
@@ -72,10 +72,11 @@ while cap.isOpened():
     frame_count += 1
     frame = cv2.flip(frame, 0)
     frame  = cv2.flip(frame, 1)
+    undistorted_frame = frame
     # cv2.imshow("frame", frame)
     # Undistort the frame
     # undistorted_frame = cv2.undistort(frame, camera_matrix, dist_coeffs, None, new_camera_matrix)
-    undistorted_frame = cv2.remap(frame, map1, map2, interpolation=cv2.INTER_LINEAR)
+    # undistorted_frame = cv2.remap(frame, map1, map2, interpolation=cv2.INTER_LINEAR)
     # Convert to HSV
     hsv = cv2.cvtColor(undistorted_frame, cv2.COLOR_BGR2HSV)
     # Make the specified region black based on the ROI
@@ -159,7 +160,7 @@ calibration_data = {'pixels_per_m': pixels_per_m_f,
 # input(f"Calibration for {position} position complete. Press Enter to continue to the next position...")
 
 
-np.savez('runcam_calibration_data_2k.npz', **calibration_data)
+# np.savez('runcam_calibration_data_2k.npz', **calibration_data)
     
 print("Camera calibration successful.")
 
