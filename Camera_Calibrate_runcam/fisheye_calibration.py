@@ -17,7 +17,7 @@ criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.1)
 objp = np.zeros((1, chessboardSize[0] * chessboardSize[1], 3), np.float32)
 objp[0, :, :2] = np.mgrid[0:chessboardSize[0], 0:chessboardSize[1]].T.reshape(-1, 2)
 
-size_of_chessboard_squares_mm = 25  # Adjust this to the real size of your squares
+size_of_chessboard_squares_mm = 22  # Adjust this to the real size of your squares
 objp = objp * size_of_chessboard_squares_mm
 
 # Arrays to store points
@@ -72,7 +72,7 @@ ret, K, D, rvecs, tvecs = cv.fisheye.calibrate(
 )
 
 # Save calibration data
-with open("fisheye_calibration_runcam_2k_25.pkl", "wb") as f:
+with open("fisheye_calibration_runcam_2k_22.pkl", "wb") as f:
     pickle.dump((K, D), f)
 
 ################ UNDISTORTION #############################################

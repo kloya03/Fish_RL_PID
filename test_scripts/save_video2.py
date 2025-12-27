@@ -4,13 +4,15 @@ import numpy as np
 import time
 import pickle
 
-# camera_matrix = np.array([[625.439, 0, 648.599],
-#                           [0, 609.2032, 379.707],
+# camera_matrix = np.array([[1.252e+03, 0, 1280],
+#                           [0, 1e+03, 720],
 #                           [0, 0, 1]], dtype=np.float32)
-# dist_coeffs = np.array([0.399, -1.466, 1.906, -0.84690], dtype=np.float32)
+# distortion_coeffs = np.array([-0.02327429, 0.04284276, -0.0447615,  0.01550882], dtype=np.float32)
 
 
-file_path = "../Camera_Calibrate_runcam/fisheye_calibration_runcam_2k_25.pkl"
+
+file_path = "../Camera_Calibrate_runcam/fisheye_calibration_final_v2.pkl"
+# file_path = "../Camera_Calibrate_runcam/fisheye_calibration_1080p_25.pkl"
 with open(file_path, "rb") as file:  # "rb" means read in binary mode
     data = pickle.load(file)
 camera_matrix, distortion_coeffs = data
@@ -27,8 +29,8 @@ h, w = 1440, 2560
 # new_camera_matrix = cv2.fisheye.estimateNewCameraMatrixForUndistortRectify(camera_matrix, distortion_coeffs, (w, h), np.eye(3), balance=1)
 # new_camera_matrix, roi = cv2.getOptimalNewCameraMatrix(camera_matrix, dist_coeffs, (w, h), 1, (w, h))
 
-# new_camera_matrix = cv2.fisheye.estimateNewCameraMatrixForUndistortRectify(camera_matrix, distortion_coeffs, (w, h), np.eye(3), balance=1)
-# map1, map2 = cv2.fisheye.initUndistortRectifyMap(camera_matrix, distortion_coeffs, np.eye(3), new_camera_matrix, (w, h), cv2.CV_16SC2)
+new_camera_matrix = cv2.fisheye.estimateNewCameraMatrixForUndistortRectify(camera_matrix, distortion_coeffs, (w, h), np.eye(3), balance=1)
+map1, map2 = cv2.fisheye.initUndistortRectifyMap(camera_matrix, distortion_coeffs, np.eye(3), new_camera_matrix, (w, h), cv2.CV_16SC2)
 
 # Open the video capture
 cap = cv2.VideoCapture(0)
@@ -51,15 +53,19 @@ while(cap.isOpened()):
         frame = cv2.flip(frame, 0)
         frame = cv2.flip(frame, 1)
         # map1, map2 = cv2.fisheye.initUndistortRectifyMap(camera_matrix, distortion_coeffs, np.eye(3), new_camera_matrix, (w, h), cv2.CV_16SC2)
-        # frame = cv2.remap(frame, map1, map2, interpolation=cv2.INTER_LINEAR)
-        
+        frame = cv2.remap(frame, map1, map2, interpolation=cv2.INTER_LINEAR)
+        # frame[:80, :] = 0  # Top boundary
+        # frame[-145:, :] = 0  # Bottom boundary
+        # frame[:, :200] = 0  # Left boundary
+        # frame[:, -10:] = 0  # Right boundary
+
         # Convert to HSV
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         # Make the specified region black based on the ROI
-        # hsv[:110, :] = 0  # Top boundary
-        # hsv[-110:, :] = 0  # Bottom boundary
-        # hsv[:, :110] = 0  # Left boundary
-        # hsv[:, -100:] = 0  # Right boundary
+        hsv[:190, :] = 0  # Top boundary
+        hsv[-200:, :] = 0  # Bottom boundary
+        hsv[:, :315] = 0  # Left boundary
+        hsv[:, -160:] = 0  # Right boundary
 
             #   Create masnp.array([[roll], [pitch], [yaw]])
         self.kf.uk for orange color
@@ -75,7 +81,7 @@ while(cap.isOpened()):
         mask1 = cv2.inRange(hsv, lower_orange, upper_orange)
         mask2 = cv2.morphologyEx(mask1, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
         mask2 = cv2.GaussianBlur(mask2, (5, 5), 0)
-        # # cv2.imshow("mask", mask2)
+        # cv2.imshow("mask", mask2)
 
         # # Find contours and sort them along areas
         contours, _ = cv2.findContours(mask2, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
