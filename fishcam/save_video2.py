@@ -11,7 +11,7 @@ import pickle
 
 
 
-file_path = "../Camera_Calibrate_runcam/fisheye_calibration_final_v2.pkl"
+file_path = "fisheye_calibration_final_v2.pkl"
 # file_path = "../Camera_Calibrate_runcam/fisheye_calibration_1080p_25.pkl"
 with open(file_path, "rb") as file:  # "rb" means read in binary mode
     data = pickle.load(file)
