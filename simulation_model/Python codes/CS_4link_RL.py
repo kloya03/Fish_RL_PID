@@ -45,7 +45,12 @@ class ChaplyginSleighModel:
         # c = 0.03                                   # length (m)
         # m_r = 0.1                                  # mass (kg)
         # I_r = m_r * 0.027**2                        # m.o.i (Kg/m^2) 
-        # # Constant Rayleigh dissipation 
+        # # Dissipation
+        #  new param 
+        # Const.C_hx = 0.6; Const.C_lx = 0.3; Const.C_wl = 0.001; Const.K_1 = 0.3; 
+        # Const.C_hy = 2;   Const.C_ly = 1.5; Const.C_wh = 0.017; Const.K_2 = 0.5;
+
+        # old param
         # C_hx = 0.46
         # C_hy = 10
         # C_lx = 0
