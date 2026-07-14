@@ -1,0 +1,13 @@
+<launch>
+    <!-- Start IMU publisher node -->
+    <node name="ImuNode" pkg="fish_robot" type="IMU_Bno085_publisher.py" output="screen"/>
+
+    <!-- Start pressure sensor ms5837 publisher node -->
+    <node name="pressure_sensors" pkg="fish_robot" type="ms5837_publisher.py" output="screen"/>
+
+    <!-- Start GPS tracker publisher node -->
+    <node name="GPSNode" pkg="fish_robot" type="GPS_publisher.py" output="screen"/>
+
+    <!-- Start Motor publisher node -->
+    <!-- <node name="MotorNode" pkg="fish_robot" type="teleop_vertiq.py" output="screen"/> -->
+</launch>

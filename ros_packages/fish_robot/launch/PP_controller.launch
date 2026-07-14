@@ -1,0 +1,11 @@
+<launch>
+    <!-- Start IMU publisher node -->
+    <node name="Imu_Node" pkg="fish_robot" type="IMU_Bno085_publisher.py" output="screen"/>
+
+    <!-- Start cam-imu KF fusion node -->
+    <node name="sesnor_fusion_Node" pkg="fish_robot" type="cam_imu_KF.py" output="screen"/>
+
+    <!-- Start Purepursuit controller publisher node -->
+    <node name="kinematic_controller_Node" pkg="fish_robot" type="purepursuit_controller.py" output="screen"/> 
+
+</launch>

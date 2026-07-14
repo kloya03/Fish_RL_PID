@@ -1,0 +1,17 @@
+<launch>
+    <!-- Start IMU publisher node -->
+    <!-- <node name="Imu_Node" pkg="fish_robot" type="IMU_Bno085_publisher.py" output="screen"/> -->
+
+    <!-- Start cam-imu KF fusion node -->
+    <!-- <node name="sesnor_fusion_Node" pkg="fish_robot" type="cam_imu_KF.py" output="screen"/> -->
+
+    <!-- Start PID controller publisher node -->
+    <!-- <node name="PID_controller_Node" pkg="fish_robot" type="PID.py" output="screen"/>  -->
+    <node name="PID_controller_Node" pkg="fish_robot" type="const_PID_gains_vel.py" output="screen"/> 
+
+    <!-- Start vertiq motor publisher node -->
+    <node name="vertiq_motor_publisher" pkg="fish_robot" type="vertiq_motor_estimates.py" output="screen"/>
+
+
+    
+</launch>

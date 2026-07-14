@@ -1,0 +1,11 @@
+<launch>
+    <!-- Start IMU publisher node -->
+    <node name="Imu_Bno085_publisher" pkg="fish_robot" type="IMU_Bno085_publisher.py" output="screen"/>
+
+    <!-- Start cam-imu KF fusion node -->
+    <node name="sensor_fusion_kf" pkg="fish_robot" type="cam_imu_KF.py" output="screen"/>
+
+    <!-- Start vertiq motor estimates publisher node -->
+    <node name="vertiq_motor_publisher" pkg="fish_robot" type="vertiq_motor_estimates.py" output="screen"/>
+
+</launch>

@@ -1,0 +1,18 @@
+<launch>
+    <!-- Nodes running on Raspberry Pi -->
+    <node
+        machine="raspberrypi"
+        pkg="fish_robot"
+        type="IMU_Bno085_publisher.py"
+        name="Imu_Bno085_publisher"
+        output="screen" />
+
+
+    <!-- Run fish_PIDcontroller.py last on Raspberry Pi -->
+    <node
+        machine="raspberrypi"
+        pkg="fish_robot"
+        type="fish_PIDcontroller.py"
+        name="tinymovr_servo_publisher"
+        output="screen" />
+</launch>

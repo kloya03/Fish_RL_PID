@@ -1,0 +1,20 @@
+std_msgs/Header header  # Contains timestamp and frame_id
+float32 goal_x
+float32 goal_y
+float32 Ld
+float32 error_yaw
+float32 e_fa
+float32 yaw_Kp
+float32 yaw_Ki
+float32 yaw_Kd
+float32 curvature_des
+float32 vel_Kp
+float32 vel_Ki
+float32 vel_Kd
+float32 error_vel
+float32 velocity_x_des
+float32 throttle
+float32 A
+float32 omega
+float32 servo_angle
+float32 theta_p

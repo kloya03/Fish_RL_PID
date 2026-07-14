@@ -1,0 +1,5 @@
+<launch>
+ 	<node name="imu_data" pkg="fish_robot" type="IMU_Bno085_publisher.py" output="screen">
+
+    </node>
+</launch>
