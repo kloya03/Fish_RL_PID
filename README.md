@@ -4,7 +4,7 @@
   <em>Physics-based simulation, BPTT-trained adaptive PID gains, and sim-to-real path tracking.</em>
 </p>
 
-This repository contains the modeling, learning, perception, control, and
+This repository contains the modeling, learning, control, and
 experimental evaluation code for **“Differentiable Reinforcement Learning for
 Path Tracking by an Agile Fish-Like Robot.”** The method learns time-varying
 PID gains in a differentiable simulator and transfers the resulting policy to
