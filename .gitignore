@@ -14,8 +14,8 @@ bin-release/
 *.apk
 
 # Video and Data files
-# *.avi
-# *.mp4
+*.avi
+*.mp4
 # *.bag
 # *.mat
 # *.fig
