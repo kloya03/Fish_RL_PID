@@ -18,6 +18,12 @@ The repository covers the complete research pipeline:
 4. deploy the controller through ROS with camera/IMU state estimation; and
 5. evaluate path and speed tracking on `I`, `R`, `O`, and `S` trajectories.
 
+<p align="center">
+  <img src="output.gif" width="480" alt="Fish-like robot swimming during an experimental trial">
+  <br>
+  <sub>Physical fish-like robot during closed-loop swimming.</sub>
+</p>
+
 ## Method at a glance
 
 The robot is a 250 mm long, 535 g planar swimmer. An internal balanced rotor
@@ -155,10 +161,34 @@ The trained policy was deployed directly on the physical robot in a 14 ft ×
 (`I`, `R`, `O`, and `S`) at commanded speeds of 0.10, 0.15, 0.20, and 0.25 m/s.
 The paper reports stable closed-loop tracking for every tested path/speed pair.
 
+### IROS trajectory gallery
+
+The following experimental overlays show the four letter-shaped reference
+paths stacked vertically. Each image combines trials at the tested commanded
+speeds so that the path-following behavior can be compared directly.
+
 <p align="center">
-  <img src="results/R/combined/R.png" width="720" alt="Experimental R-path overlays at four commanded speeds">
+  <img src="results/I/combined/I.png" width="620" alt="Experimental I-path overlays at four commanded speeds">
   <br>
-  <sub>R-path experiments at four commanded speeds; colors show individual tracked trajectories.</sub>
+  <sub><strong>I path</strong> — predominantly straight-line tracking.</sub>
+</p>
+
+<p align="center">
+  <img src="results/R/combined/R.png" width="620" alt="Experimental R-path overlays at four commanded speeds">
+  <br>
+  <sub><strong>R path</strong> — mixed straight and curved segments.</sub>
+</p>
+
+<p align="center">
+  <img src="results/O/combined/O.png" width="620" alt="Experimental O-path overlays at four commanded speeds">
+  <br>
+  <sub><strong>O path</strong> — continuous closed-loop turning.</sub>
+</p>
+
+<p align="center">
+  <img src="results/S/combined/s.png" width="620" alt="Experimental S-path overlays at four commanded speeds">
+  <br>
+  <sub><strong>S path</strong> — alternating-curvature tracking.</sub>
 </p>
 
 Across the experimental matrix, the reported cross-track RMSE ranges from
