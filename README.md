@@ -10,6 +10,11 @@ Path Tracking by an Agile Fish-Like Robot.”** The method learns time-varying
 PID gains in a differentiable simulator and transfers the resulting policy to
 a physical internally actuated fish robot.
 
+This repository accompanies:
+
+> P. Chivkula, K. Loya, V. R. R. Varikuti and P. Tallapragada, “Differentiable Reinforcement Learning for Path Tracking by an Agile Fish-Like Robot,” *arxiv*, 2026. ](https://arxiv.org/abs/2607.16508)
+
+
 The repository covers the complete research pipeline:
 
 1. derive and validate a reduced-order modified Chaplygin-sleigh model;
@@ -229,10 +234,14 @@ Large `.bag` and video files are raw experimental artifacts; the `.npy`, `.npz`,
 If this repository supports your work, please cite the companion manuscript:
 
 ```bibtex
-@inproceedings{chivkula2026differentiable,
-  title     = {Differentiable Reinforcement Learning for Path Tracking by an Agile Fish-Like Robot},
-  author    = {Chivkula, Prashanth and Loya, Kartik and Varikuti, Venkata Ravindhra Reddy and Tallapragada, Phanindra},
-  year      = {2026}
+@misc{chivkula2026_diff_rl_fish,
+      title={Differentiable Reinforcement Learning for Path Tracking by an Agile Fish-Like Robot}, 
+      author={Prashanth Chivkula and Kartik Loya and Venkata Ravindhra Reddy Varikuti and Phanindra Tallapragada},
+      year={2026},
+      eprint={2607.16508},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2607.16508}, 
 }
 ```
 
